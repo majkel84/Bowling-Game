@@ -1,0 +1,167 @@
+SCENARIO("game of all misess"){
+    GIVEN("game of all misess") {
+        std::vector<int> v(20, 0);
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is equal 0") {
+                REQUIRE_THAT(score, Equals(0));  
+            }
+        }
+    }
+}
+
+SCENARIO("game of all ones"){
+    GIVEN("game of all ones") {
+        std::vector<int> v(20, 1);
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is equal 20") {
+                REQUIRE_THAT(score, Equals(20));  
+            }
+        }
+    }
+}
+
+SCENARIO("game of all strikes"){
+    GIVEN("game of all strikes") {
+        std::vector<int> v(12, 10);
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is equal 300") {
+                REQUIRE_THAT(score, Equals(300));  
+            }
+        }
+    }
+}
+
+SCENARIO("game of all spares"){
+    GIVEN("game of all spares") {
+        std::vector<int> v(21, 5);
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is equal 150") {
+                REQUIRE_THAT(score, Equals(150));  
+            }
+        }
+    }
+}
+
+SCENARIO("game of one strike in the middle"){
+    GIVEN("game of one strike in the middle") {
+        std::vector<int> v{1,1, 1,1, 1,1, 10, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is equal 30") {
+                REQUIRE_THAT(score, Equals(30));  
+            }
+        }
+    }
+}
+
+SCENARIO("game of one spare in the middle"){
+    GIVEN("game of one spare in the middle") {
+        std::vector<int> v{1,1, 1,1, 1,1, 5,5, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is equal 29") {
+                REQUIRE_THAT(score, Equals(29));  
+            }
+        }
+    }
+}
+
+SCENARIO("game of one spare and one strike in the middle"){
+    GIVEN("game of one spare and one strike in the middle") {
+        std::vector<int> v{1,1, 1,1, 1,1, 5,5, 1,1, 10, 1,1, 1,1, 1,1, 1,1};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is equal 39") {
+                REQUIRE_THAT(score, Equals(39));  
+            }
+        }
+    }
+}
+
+SCENARIO("game of one strike at the end"){
+    GIVEN("game of one strike at the end") {
+        std::vector<int> v{1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 10, 1,1};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is equal 30") {
+                REQUIRE_THAT(score, Equals(30));  
+            }
+        }
+    }
+}
+
+SCENARIO("game of one spare at the end"){
+    GIVEN("game of one spare at the end") {
+        std::vector<int> v{1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 1,1, 5,5, 1};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is equal 29") {
+                REQUIRE_THAT(score, Equals(29));  
+            }
+        }
+    }
+}
+
+SCENARIO("game of one spare after strike in the middle"){
+    GIVEN("game of one spare after strike in the middle") {
+        std::vector<int> v{1,1, 1,1, 1,1, 10, 5,5, 1,1, 1,1, 1,1, 1,1, 1,1};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is equal 0") {
+                REQUIRE_THAT(score, Equals(47));  
+            }
+        }
+    }
+}
+
+SCENARIO("game of two spares after strike in the middle"){
+    GIVEN("game of two spares after strike in the middle") {
+        std::vector<int> v{1,1, 1,1, 1,1, 10, 5,5, 5,5, 1,1, 1,1, 1,1, 1,1};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is equal 0") {
+                REQUIRE_THAT(score, Equals(60));  
+            }
+        }
+    }
+}
+
+SCENARIO("game of one strike after spare in the middle"){
+    GIVEN("game of one strike after spare in the middle") {
+        std::vector<int> v{1,1, 1,1, 1,1, 1,1, 5,5, 10, 1,1, 1,1, 1,1, 1,1};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is equal 0") {
+                REQUIRE_THAT(score, Equals(66));  
+            }
+        }
+    }
+}
+
+SCENARIO("game of mixed strike after spare"){
+    GIVEN("game of mixed strike after spare") {
+        std::vector<int> v{5,5, 10, 5,5, 10, 5,5, 10, 5,5, 10, 5,5, 10, 5,5};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is equal 0") {
+                REQUIRE_THAT(score, Equals(200));  
+            }
+        }
+    }
+}
+
+SCENARIO("game of mixed spare after strike"){
+    GIVEN("game of mixed spare after strike") {
+        std::vector<int> v{10, 5,5, 10, 5,5, 10, 5,5, 10, 5,5, 10, 5,5, 10};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is equal 0") {
+                REQUIRE_THAT(score, Equals(200));  
+            }
+        }
+    }
+}
