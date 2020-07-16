@@ -165,3 +165,74 @@ SCENARIO("game of mixed spare after strike"){
         }
     }
 }
+
+SCENARIO("game have ten turns"){
+    GIVEN("counter of turns") {
+        int turnCounter = 0;
+        int maxTurns = 10;
+        WHEN ("turnCounter == maxTurns") {
+            THEN ("Game end") {
+                REQUIRE_THAT(turnCounter, Equals(maxTurns));  
+            }
+        }
+    }
+}
+
+SCENARIO("each turn have maximum two tries"){
+    GIVEN("triesCounter and turnCounter") {
+        int turnCounter = 1;
+        int triesCounter = 0;
+        int maxTries = 2;
+        WHEN ("triesCounter == maxTries") {
+            THEN ("Increment turnCounter") {
+                int expectedValue = 2;
+                REQUIRE_THAT(turnCounter, Equals(expectedValue));  
+            }
+        }
+    }
+}
+
+SCENARIO("first ball in a turn knocks down all ten pins"){
+    GIVEN("turnCounter") {
+        int turnCounter = 1;
+        WHEN ("ball knocks down all pins") {
+                turnCounter++;
+            THEN ("Increment turnCounter") {
+                int expectedValue = 2;
+                REQUIRE_THAT(turnCounter, Equals(expectedValue));  
+            }
+        }
+    }
+}
+
+
+SCENARIO("first ball in a turn knocks down all ten pins"){
+    GIVEN("strikeScore and score of next two balls") {
+        int strikeScore = 10;
+        int firstNextBallScore = 8;
+        int secondNextBallScore = 6;
+        WHEN ("ball knocks down all pins") {
+                int totalScore = strikeScore;
+            THEN ("Add to totalScore scoree of next two balls") {
+                totalScore = firstNextBallScore + secondNextBallScore;
+                int expectedValue = 24;
+                REQUIRE_THAT(totalScore, Equals(expectedValue));  
+            }
+        }
+    }
+}
+
+SCENARIO("second ball in a turn knocks down all ten pins"){
+    GIVEN("spareScore and score of next ball") {
+        int spareScore = 10;
+        int firstNextBallScore = 8;
+        WHEN ("ball knocks down all pins") {
+                int totalScore = spareScore;
+            THEN ("Add to totalScore scoree of next ball") {
+                totalScore = firstNextBallScore;
+                int expectedValue = 18;
+                REQUIRE_THAT(totalScore, Equals(expectedValue));  
+            }
+        }
+    }
+}
