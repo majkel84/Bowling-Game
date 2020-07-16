@@ -225,3 +225,76 @@ SCENARIO("game with no spare and no strike in last round"){
         }
     }
 }
+
+
+SCENARIO("game with wrong score in last round"){
+    GIVEN("game with wrong score in last round") {
+        std::vector<int> v{0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 4,4,4};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is incorrect, there should be no third throw") {
+                """REQUIRE EXCEPTION"""  
+            }
+        }
+    }
+}
+
+SCENARIO("game with too big score in one round"){
+    GIVEN("game with too big score in one round") {
+        std::vector<int> v{9,9, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is incorrect, there should not be more than 10 points in one round") {
+                """REQUIRE EXCEPTION"""  
+            }
+        }
+    }
+}
+
+SCENARIO("game with negative (compensated) score in one round"){
+    GIVEN("game with negative (compensated) score in one round") {
+        std::vector<int> v{-1,1, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is incorrect, there should not be negative number of points") {
+                """REQUIRE EXCEPTION"""  
+            }
+        }
+    }
+}
+
+SCENARIO("game with negative score in one round"){
+    GIVEN("game with negative score in one round") {
+        std::vector<int> v{-1,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is incorrect, there should not be negative number of points") {
+                """REQUIRE EXCEPTION"""  
+            }
+        }
+    }
+}
+
+SCENARIO("game with too big score for one throw"){
+    GIVEN("game with too big score for one throw") {
+        std::vector<int> v{158,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is incorrect, maximum score in one throw is 10") {
+                """REQUIRE EXCEPTION"""  
+            }
+        }
+    }
+}
+
+SCENARIO("game with too many rounds"){
+    GIVEN("game with too many rounds") {
+        std::vector<int> v{0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("number of rounds is incorrect, there should be 10 rounds") {
+                """REQUIRE EXCEPTION"""  
+            }
+        }
+    }
+}
