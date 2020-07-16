@@ -111,7 +111,7 @@ SCENARIO("game of one spare after strike in the middle"){
         std::vector<int> v{1,1, 1,1, 1,1, 10, 5,5, 1,1, 1,1, 1,1, 1,1, 1,1};
         WHEN ("count score after game") {
             int score = countScore(v);
-            THEN ("score is equal 0") {
+            THEN ("score is equal 47") {
                 REQUIRE_THAT(score, Equals(47));  
             }
         }
@@ -123,7 +123,7 @@ SCENARIO("game of two spares after strike in the middle"){
         std::vector<int> v{1,1, 1,1, 1,1, 10, 5,5, 5,5, 1,1, 1,1, 1,1, 1,1};
         WHEN ("count score after game") {
             int score = countScore(v);
-            THEN ("score is equal 0") {
+            THEN ("score is equal 60") {
                 REQUIRE_THAT(score, Equals(60));  
             }
         }
@@ -135,7 +135,7 @@ SCENARIO("game of one strike after spare in the middle"){
         std::vector<int> v{1,1, 1,1, 1,1, 1,1, 5,5, 10, 1,1, 1,1, 1,1, 1,1};
         WHEN ("count score after game") {
             int score = countScore(v);
-            THEN ("score is equal 0") {
+            THEN ("score is equal 66") {
                 REQUIRE_THAT(score, Equals(66));  
             }
         }
@@ -147,7 +147,7 @@ SCENARIO("game of mixed strike after spare"){
         std::vector<int> v{5,5, 10, 5,5, 10, 5,5, 10, 5,5, 10, 5,5, 10, 5,5};
         WHEN ("count score after game") {
             int score = countScore(v);
-            THEN ("score is equal 0") {
+            THEN ("score is equal 200") {
                 REQUIRE_THAT(score, Equals(200));  
             }
         }
@@ -159,8 +159,68 @@ SCENARIO("game of mixed spare after strike"){
         std::vector<int> v{10, 5,5, 10, 5,5, 10, 5,5, 10, 5,5, 10, 5,5, 10};
         WHEN ("count score after game") {
             int score = countScore(v);
-            THEN ("score is equal 0") {
+            THEN ("score is equal 200") {
                 REQUIRE_THAT(score, Equals(200));  
+            }
+        }
+    }
+}
+
+SCENARIO("game with zeros after strike"){
+    GIVEN("game with zeros after strike") {
+        std::vector<int> v{10, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is equal 10") {
+                REQUIRE_THAT(score, Equals(10));  
+            }
+        }
+    }
+}
+
+SCENARIO("game with zeros after spare"){
+    GIVEN("game with zeros after spare") {
+        std::vector<int> v{4,6, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is equal 10") {
+                REQUIRE_THAT(score, Equals(10));  
+            }
+        }
+    }
+}
+
+SCENARIO("game with strikes only in last round"){
+    GIVEN("game with strikes only in last round") {
+        std::vector<int> v{0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 10,10,10};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is equal 30") {
+                REQUIRE_THAT(score, Equals(30));  
+            }
+        }
+    }
+}
+
+SCENARIO("game with spare and six in last round"){
+    GIVEN("game with spare and six in last round") {
+        std::vector<int> v{0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 4,6,6};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is equal 16") {
+                REQUIRE_THAT(score, Equals(16));  
+            }
+        }
+    }
+}
+
+SCENARIO("game with no spare and no strike in last round"){
+    GIVEN("game with no spare and no strike in last round") {
+        std::vector<int> v{0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 4,4};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("score is equal 8") {
+                REQUIRE_THAT(score, Equals(8));  
             }
         }
     }
