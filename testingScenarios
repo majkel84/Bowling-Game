@@ -298,3 +298,39 @@ SCENARIO("game with too many rounds"){
         }
     }
 }
+
+SCENARIO("game with too many bonus throws"){
+    GIVEN("game with too many bonus throws") {
+        std::vector<int> v{0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 10,10,10,10};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("number of bonus throws is incorrect, there should be max of two bonus throws") {
+                """REQUIRE EXCEPTION"""  
+            }
+        }
+    }
+}
+
+SCENARIO("game with too less throws in final round"){
+    GIVEN("game with too less throws in final round") {
+        std::vector<int> v{0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 10};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("number of throws in final round is incorrect, there should be at least two throws in last round") {
+                """REQUIRE EXCEPTION"""  
+            }
+        }
+    }
+}
+
+SCENARIO("game with too less rounds"){
+    GIVEN("game with too less rounds") {
+        std::vector<int> v{0,0, 0,0};
+        WHEN ("count score after game") {
+            int score = countScore(v);
+            THEN ("number of rounds is too small") {
+                """REQUIRE EXCEPTION"""  
+            }
+        }
+    }
+}
