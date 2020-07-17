@@ -223,7 +223,7 @@ SCENARIO("first ball in a turn knocks down all ten pins"){
     }
 }
 
-SCENARIO("second ball in a turn knocks down all ten pins"){
+SCENARIO("counting score for single spare case"){
     GIVEN("spareScore and score of next ball") {
         int spareScore = 10;
         int firstNextBallScore = 8;
