@@ -170,6 +170,7 @@ SCENARIO("game have ten turns"){
     GIVEN("counter of turns") {
         int turnCounter = 0;
         int maxTurns = 10;
+        playGame(turnCounter);
         WHEN ("turnCounter == maxTurns") {
             THEN ("Game end") {
                 REQUIRE_THAT(turnCounter, Equals(maxTurns));  
