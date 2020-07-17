@@ -209,13 +209,10 @@ SCENARIO("first ball in a turn knocks down all ten pins"){
 
 SCENARIO("first ball in a turn knocks down all ten pins"){
     GIVEN("strikeScore and score of next two balls") {
-        int strikeScore = 10;
-        int firstNextBallScore = 8;
-        int secondNextBallScore = 6;
+        std::vector<int> score {10, 8, 6};
         WHEN ("ball knocks down all pins") {
-                int totalScore = strikeScore;
-            THEN ("Add to totalScore scoree of next two balls") {
-                totalScore = firstNextBallScore + secondNextBallScore;
+                int totalScore = countScore(score);
+            THEN ("totalScore should equal to expectedValue") 
                 int expectedValue = 24;
                 REQUIRE_THAT(totalScore, Equals(expectedValue));  
             }
