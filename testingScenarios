@@ -184,7 +184,7 @@ SCENARIO("each turn have maximum two tries"){
         int turnCounter = 1;
         int triesCounter = 0;
         int maxTries = 2;
-playGame(turnCounter);
+        playGame(turnCounter);
         WHEN ("triesCounter == maxTries") {
             THEN ("Increment turnCounter") {
                 int expectedValue = 2;
@@ -210,7 +210,7 @@ SCENARIO("first ball in a turn knocks down all ten pins"){
 
 SCENARIO("first ball in a turn knocks down all ten pins"){
     GIVEN("strikeScore and score of next two balls") {
-        std::vector<int> score {10, 8, 6};
+        std::vector<std::pair<int, int>> score { {1, 10}, {2, 8}, {3, 6} };
         WHEN ("ball knocks down all pins") {
                 int totalScore = countScore(score);
             THEN ("totalScore should equal to expectedValue") 
@@ -223,12 +223,10 @@ SCENARIO("first ball in a turn knocks down all ten pins"){
 
 SCENARIO("counting score for single spare case"){
     GIVEN("spareScore and score of next ball") {
-        int spareScore = 10;
-        int firstNextBallScore = 8;
+        std::vector<std::pair<int, int>> score { {1,10}, {2, 8} }
         WHEN ("ball knocks down all pins") {
-                int totalScore = spareScore;
-            THEN ("Add to totalScore scoree of next ball") {
-                totalScore = firstNextBallScore;
+            THEN ("Add to totalScore scoree of next ball and totalScore should equal to expectedValue") {
+                int totalScore = countScore(score);
                 int expectedValue = 18;
                 REQUIRE_THAT(totalScore, Equals(expectedValue));  
             }
