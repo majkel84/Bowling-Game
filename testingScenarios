@@ -184,6 +184,7 @@ SCENARIO("each turn have maximum two tries"){
         int turnCounter = 1;
         int triesCounter = 0;
         int maxTries = 2;
+playGame(turnCounter);
         WHEN ("triesCounter == maxTries") {
             THEN ("Increment turnCounter") {
                 int expectedValue = 2;
