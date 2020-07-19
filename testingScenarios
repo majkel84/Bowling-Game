@@ -334,3 +334,24 @@ SCENARIO("game with too less rounds"){
         }
     }
 }
+
+SCENARIO("check score vector size with no spare or strike at the end"){
+    GIVEN("sccore vector of pairs") {
+        std::vector<std::pair<int,int>> v {};
+        const size_t rounds = 10;
+        WHEN ("check vector size after game") {
+            playGame(rounds);
+            THEN ("vector size should be equal 10 or 11 or 12") {
+                if (v.back().first == 10) { 
+                    REQUIRE_THAT(v.size(), Equals(12));
+                }
+                else if (v.back().first + v.back().second == 10) {
+                    REQUIRE_THAT(v.size(), Equals(12));
+                }
+                REQUIRE_THAT(v.size(), Equals(10));
+            }
+        }
+    }
+}
+
+
