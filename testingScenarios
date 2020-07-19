@@ -360,9 +360,28 @@ SCENARIO("check all vector elements are digit"){
         WHEN ("check all elements after game is played") {
             const size_t rounds = 10;
             playGame(rounds);
-            THEN ("number of rounds is too small") {
+            THEN ("all elements of score vector should be digit") {
                 auto& it = find_if(v.begin(), v.end(), isdigit);
                 REQUIRE(it == v.end());  
+            }
+        }
+    }
+}
+
+SCENARIO("check all vector elements are positive"){
+    GIVEN("empty vecotr of pairs") {
+        std::vector<pair<int,int>> v{};
+        WHEN ("check all elements after game is played") {
+            const size_t rounds = 10;
+            playGame(rounds);
+            THEN ("all elements of vector should be positive") {
+                bool arePositive = TRUE;
+                for (const auto& it: v) {
+                    if (*it.first < 0 || *it.second < 0) {
+                        arePositive = FALSE;
+                    }
+                }
+                REQUIRE(arePositive);  
             }
         }
     }
