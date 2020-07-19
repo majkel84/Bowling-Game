@@ -346,7 +346,7 @@ SCENARIO("check score vector size with no spare or strike at the end"){
                     REQUIRE_THAT(v.size(), Equals(12));
                 }
                 else if (v.back().first + v.back().second == 10) {
-                    REQUIRE_THAT(v.size(), Equals(12));
+                    REQUIRE_THAT(v.size(), Equals(11));
                 }
                 REQUIRE_THAT(v.size(), Equals(10));
             }
@@ -355,13 +355,13 @@ SCENARIO("check score vector size with no spare or strike at the end"){
 }
 
 SCENARIO("check all vector elements are digit"){
-    GIVEN("empty vecotr of pairs") {
+    GIVEN("empty vector of pairs") {
         std::vector<pair<int,int>> v{};
         WHEN ("check all elements after game is played") {
             const size_t rounds = 10;
             playGame(rounds);
             THEN ("all elements of score vector should be digit") {
-                auto& it = find_if(v.begin(), v.end(), isdigit);
+                auto& it = find_if_not(v.begin(), v.end(), isdigit);
                 REQUIRE(it == v.end());  
             }
         }
