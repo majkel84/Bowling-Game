@@ -224,7 +224,7 @@ SCENARIO("first ball in a turn knocks down all ten pins"){
 SCENARIO("counting score for single spare case"){
     GIVEN("spareScore and score of next ball") {
         std::vector<std::pair<int, int>> score { {1,10}, {2, 8} }
-        WHEN ("ball knocks down all pins") {
+        WHEN ("second ball knocks down all pins") {
             THEN ("Add to totalScore scoree of next ball and totalScore should equal to expectedValue") {
                 int totalScore = countScore(score);
                 int expectedValue = 18;
