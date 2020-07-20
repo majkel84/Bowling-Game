@@ -214,7 +214,7 @@ SCENARIO("first ball in a turn knocks down all ten pins"){
         WHEN ("ball knocks down all pins") {
                 int totalScore = countScore(score);
             THEN ("totalScore should equal to expectedValue") 
-                int expectedValue = 18;
+                int expectedValue = 35;
                 REQUIRE_THAT(totalScore, Equals(expectedValue));  
             }
         }
