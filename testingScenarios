@@ -227,7 +227,7 @@ SCENARIO("counting score for single spare case"){
         WHEN ("second ball knocks down all pins") {
             THEN ("Add to totalScore score of next ball and totalScore should equal to expectedValue") {
                 int totalScore = countScore(score);
-                int expectedValue = 18;
+                int expectedValue = 26;
                 REQUIRE_THAT(totalScore, Equals(expectedValue));  
             }
         }
