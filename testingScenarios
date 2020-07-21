@@ -185,6 +185,7 @@ SCENARIO("game with zeros after spare"){
             int score = countScore(v);
             THEN ("score is equal 10") {
                 REQUIRE_THAT(score, Equals(10));  
+
             }
         }
     }
@@ -317,7 +318,7 @@ SCENARIO("game with too less throws in final round"){
         WHEN ("count score after game") {
             int score = countScore(v);
             THEN ("number of throws in final round is incorrect, there should be at least two throws in last round") {
-                """REQUIRE EXCEPTION"""  
+                """REQUIRE EXCEPTION"""
             }
         }
     }
@@ -329,7 +330,7 @@ SCENARIO("game with too less rounds"){
         WHEN ("count score after game") {
             int score = countScore(v);
             THEN ("number of rounds is too small") {
-                """REQUIRE EXCEPTION"""  
+                """REQUIRE EXCEPTION"""
             }
         }
     }
@@ -387,4 +388,70 @@ SCENARIO("check all vector elements are positive"){
     }
 }
 
+SCENARIO("game have ten turns"){
+    GIVEN("counter of turns") {
+        int turnCounter = 0;
+        int maxTurns = 10;
+        playGame(turnCounter);
+        WHEN ("turnCounter == maxTurns") {
+            THEN ("Game end") {
+                REQUIRE_THAT(turnCounter, Equals(maxTurns));
+                }
+        }
+    }
+}
+                
+                
+SCENARIO("each turn have maximum two tries"){
+    GIVEN("triesCounter and turnCounter") {
+        int turnCounter = 1;
+        int triesCounter = 0;
+        int maxTries = 2;
+        playGame(turnCounter);
+        WHEN ("triesCounter == maxTries") {
+            THEN ("Increment turnCounter") {
+                int expectedValue = 2;
+                REQUIRE_THAT(turnCounter, Equals(expectedValue));
+            }
+        }
+    }
+}
 
+SCENARIO("first ball in a turn knocks down all ten pins"){
+    GIVEN("turnCounter") {
+        int turnCounter = 1;
+        WHEN ("ball knocks down all pins") {
+                turnCounter++;
+            THEN ("Increment turnCounter") {
+                int expectedValue = 2;
+                REQUIRE_THAT(turnCounter, Equals(expectedValue));
+             }
+        }
+    }
+}
+
+SCENARIO("first ball in a turn knocks down all ten pins"){
+    GIVEN("strikeScore and score of next two balls") {
+        std::vector<std::pair<int, int>> score { {10, 0}, {6, 2}, {3, 6} };
+        WHEN ("ball knocks down all pins") {
+                int totalScore = countScore(score);
+            THEN ("totalScore should equal to expectedValue") 
+                int expectedValue = 35;
+                REQUIRE_THAT(totalScore, Equals(expectedValue));
+            }
+        }
+    }
+}
+
+SCENARIO("counting score for single spare case"){
+    GIVEN("spareScore and score of next ball") {
+        std::vector<std::pair<int, int>> score { {0,10}, {8, 0} }
+        WHEN ("second ball knocks down all pins") {
+            THEN ("Add to totalScore score of next ball and totalScore should equal to expectedValue") {
+                int totalScore = countScore(score);
+                int expectedValue = 26;
+                REQUIRE_THAT(totalScore, Equals(expectedValue));
+            }
+        }
+    }
+}
